@@ -9,6 +9,7 @@ import de.hsos.kbse.messaging.dtos.MyMessageDTO;
 import de.hsos.kbse.messagingserver.repositories.MyMessageRepository;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -45,6 +46,18 @@ public class MyMessageController {
         
     }
     
+        @PostConstruct
+    public void init() {
+        try {
+            myCon = myConnectionFactory.createConnection();
+            mySession = myCon.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            myProducer = mySession.createProducer(myTopic);
+        } catch (JMSException ex) {
+            Logger.getLogger(MyMessageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     public void processIncomingMessage(Message incMsg) {
         if (incMsg instanceof ObjectMessage) {
             try {
@@ -55,11 +68,11 @@ public class MyMessageController {
                 
                 msgRepo.persistMessage(myMsg);
                 
+                
+                
             } catch (JMSException ex) {
                 Logger.getLogger(MyMessageController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            System.out.println("jap");
         }
     }
     
