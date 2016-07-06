@@ -1,1 +1,5 @@
+/Users/davidherzog/NetBeansProjects/KBSEHausarbeitServer/src/main/java/de/hsos/kbse/messaging/entities/MyMessage.java
+/Users/davidherzog/NetBeansProjects/KBSEHausarbeitServer/src/main/java/de/hsos/kbse/messagingserver/controller/MyMessageController.java
+/Users/davidherzog/NetBeansProjects/KBSEHausarbeitServer/src/main/java/de/hsos/kbse/messaging/dtos/MyMessageDTO.java
+/Users/davidherzog/NetBeansProjects/KBSEHausarbeitServer/src/main/java/de/hsos/kbse/messagingserver/repositories/MyMessageRepository.java
 /Users/davidherzog/NetBeansProjects/KBSEHausarbeitServer/src/main/java/de/hsos/kbse/messagingserver/boundary/MessageHandler.java

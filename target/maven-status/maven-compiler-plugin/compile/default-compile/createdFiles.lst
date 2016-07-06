@@ -1,1 +1,6 @@
+de/hsos/kbse/messaging/dtos/MyMessageDTO.class
+de/hsos/kbse/messagingserver/controller/MyMessageController.class
+de/hsos/kbse/messaging/entities/MyMessage.class
+de/hsos/kbse/messagingserver/repositories/MyMessageRepository.class
+de/hsos/kbse/messaging/entities/MyMessage_.class
 de/hsos/kbse/messagingserver/boundary/MessageHandler.class

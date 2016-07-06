@@ -5,11 +5,13 @@
  */
 package de.hsos.kbse.messagingserver.controller;
 
-import de.hsos.kbse.messaging.entities.MyMessage;
+import de.hsos.kbse.messaging.dtos.MyMessageDTO;
+import de.hsos.kbse.messagingserver.repositories.MyMessageRepository;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
@@ -25,6 +27,9 @@ import javax.jms.Topic;
  */
 @ApplicationScoped
 public class MyMessageController {
+    
+    @Inject
+    MyMessageRepository msgRepo;
     
     @Resource(lookup = "jms/ConnectionFactory")
     private ConnectionFactory myConnectionFactory;
@@ -44,9 +49,11 @@ public class MyMessageController {
         if (incMsg instanceof ObjectMessage) {
             try {
                 ObjectMessage objectMsg =(ObjectMessage)incMsg;
-                MyMessage myMsg = (MyMessage)objectMsg.getObject();
+                MyMessageDTO myMsg = (MyMessageDTO)objectMsg.getObject();
                 
                 System.out.println(myMsg.getMessage());
+                
+                msgRepo.persistMessage(myMsg);
                 
             } catch (JMSException ex) {
                 Logger.getLogger(MyMessageController.class.getName()).log(Level.SEVERE, null, ex);
