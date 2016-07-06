@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.hsos.kbse.messagingserver.entities;
+package de.hsos.kbse.messaging.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author davidherzog
  */
-public class MyMessage {
+public class MyMessage implements Serializable {
     
     private Date dateSent;
     private String message;

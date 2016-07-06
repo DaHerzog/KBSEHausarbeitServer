@@ -5,16 +5,13 @@
  */
 package de.hsos.kbse.messagingserver.boundary;
 
-import javax.annotation.Resource;
+
+import de.hsos.kbse.messagingserver.controller.MyMessageController;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.enterprise.context.ApplicationScoped;
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
+import javax.inject.Inject;
 import javax.jms.Message;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.Topic;
 
 /**
  *
@@ -27,22 +24,15 @@ import javax.jms.Topic;
 @ApplicationScoped
 public class MessageHandler {
     
-    @Resource(lookup = "jms/ConnectionFactory")
-    private ConnectionFactory myConnectionFactory;
-    
-    @Resource(lookup="jms/myTopic")
-    private Topic myTopic;
-    
-    private Connection myCon;
-    private Session mySession;
-    private MessageProducer myProducer;
+    @Inject
+    MyMessageController msgCtrl;
     
     public MessageHandler() {
         
     }
     
     public void onMessage(Message inMsg) {
-        System.out.println("onMessage wurde aufgerufen!");
+        msgCtrl.processIncomingMessage(inMsg);
     }
     
 }
