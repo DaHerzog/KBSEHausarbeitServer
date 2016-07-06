@@ -20,6 +20,7 @@ import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
+import javax.jms.TextMessage;
 import javax.jms.Topic;
 
 /**
@@ -68,6 +69,8 @@ public class MyMessageController {
                 
                 msgRepo.persistMessage(myMsg);
                 
+                TextMessage txtMsg = mySession.createTextMessage(myMsg.getAuthor() + ": " + myMsg.getMessage());
+                myProducer.send(txtMsg);
                 
                 
             } catch (JMSException ex) {
