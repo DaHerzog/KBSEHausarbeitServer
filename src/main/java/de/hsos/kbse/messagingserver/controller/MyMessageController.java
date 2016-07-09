@@ -65,8 +65,6 @@ public class MyMessageController {
                 ObjectMessage objectMsg =(ObjectMessage)incMsg;
                 MyMessageDTO myMsg = (MyMessageDTO)objectMsg.getObject();
                 
-                System.out.println(myMsg.getMessage());
-                
                 msgRepo.persistMessage(myMsg);
                 
                 TextMessage txtMsg = mySession.createTextMessage(myMsg.getAuthor() + ": " + myMsg.getMessage());
